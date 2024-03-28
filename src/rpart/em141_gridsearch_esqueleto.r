@@ -117,7 +117,7 @@ tb_grid_search <- data.table( max_depth = integer(),
 
 for (vmax_depth in c(4, 6, 8, 10, 12)) {
   for (vmin_split in c(200,400,600,800, 1000, 2000)) {
-    for (vmin_bucket in c(min_split/3,min_split/2)) {  
+    for (vmin_bucket in c(50,100,200,300,150,300,400,500,1000)) {  
       for (vcp in c(0.8,-0.5,-0.3,0.7)) {
     # notar como se agrega
 
