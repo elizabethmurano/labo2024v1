@@ -1,5 +1,7 @@
 # Arbol elemental con libreria  rpart
 # Debe tener instaladas las librerias  data.table  ,  rpart  y  rpart.plot
+install.packages(c("data.table", "rpart", "rpart.plot"))
+
 
 # cargo las librerias que necesito
 require("data.table")
