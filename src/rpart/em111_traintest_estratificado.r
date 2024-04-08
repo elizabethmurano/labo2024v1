@@ -5,7 +5,7 @@ require("data.table")
 require("rpart")
 
 PARAM <- list()
-PARAM$semilla <- 127291
+PARAM$semilla <- 141223
 
 
 #------------------------------------------------------------------------------
@@ -45,6 +45,7 @@ dataset <- dataset[clase_ternaria != ""]
 # particiono estratificadamente el dataset
 # Cambiar por la primer semilla de cada uno !
 
+setorder( dataset,cliente_antiguedad)
 particionar(dataset, division = c(7, 3), 
             agrupa = "clase_ternaria", seed = PARAM$semilla) # aqui se usa SU semilla
 
@@ -60,7 +61,6 @@ param_basicos <- list(
 # quiero predecir clase_ternaria a partir del resto
 # fold==1  es training,  el 70% de los datos
 
-setorder( dataset,cliente_antiguedad)
 modelo <- rpart("clase_ternaria ~ .",
                 data = dataset[fold == 1],
                 xval = 0,
