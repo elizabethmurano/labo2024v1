@@ -33,7 +33,7 @@ options(error = function() {
 #  muy pronto esto se leera desde un archivo formato .yaml
 PARAM <- list()
 
-PARAM$experimento <- "HT4510"
+PARAM$experimento <- "HT4511"
 
 PARAM$input$dataset <- "./datasets/dataset_pequeno.csv"
 PARAM$input$training <- c(202107) # los meses en los que vamos a entrenar
@@ -55,8 +55,14 @@ hs <- makeParamSet(
   makeNumericParam("feature_fraction", lower = 0.2, upper = 1.0),
   makeIntegerParam("min_data_in_leaf", lower = 1L, upper = 8000L),
   makeIntegerParam("num_leaves", lower = 16L, upper = 1024L),
-  makeIntegerParam("envios", lower = 5000L, upper = 15000L)
-)
+  makeIntegerParam("envios", lower = 5000L, upper = 12000L),
+  makeIntegerParam("max_depth", lower = 3L, upper = 30L),
+  #makeIntegerParam("min_gain_to_split", lower = 0L, upper = 80000L),
+  makeDiscreteParam("lambda_l1", values = c(0.01, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0)),
+  makeDiscreteParam("lambda_l2", values = c(0.01, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0)),
+  makeIntegerParam("max_bin", lower = 3L, upper = 30L),
+  makeIntegerParam("num_iterations", lower = 30L, upper = 9000L)
+ )
 
 #------------------------------------------------------------------------------
 # graba a un archivo los componentes de lista
@@ -138,12 +144,12 @@ EstimarGanancia_lightgbm <- function(x) {
     boost_from_average = TRUE,
     feature_pre_filter = FALSE,
     verbosity = -100,
-    max_depth = -1, # -1 significa no limitar,  por ahora lo dejo fijo
+    #max_depth = -1, # -1 significa no limitar,  por ahora lo dejo fijo
     min_gain_to_split = 0.0, # por ahora, lo dejo fijo
-    lambda_l1 = 0.0, # por ahora, lo dejo fijo
-    lambda_l2 = 0.0, # por ahora, lo dejo fijo
-    max_bin = 31, # por ahora, lo dejo fijo
-    num_iterations = 9999, # valor grande, lo limita early_stopping_rounds
+    #lambda_l1 = 0.0, # por ahora, lo dejo fijo
+    #lambda_l2 = 0.0, # por ahora, lo dejo fijo
+    #max_bin = 31, # por ahora, lo dejo fijo
+    #num_iterations = 9999, # valor grande, lo limita early_stopping_rounds
     force_row_wise = TRUE, # para evitar warning
     seed = ksemilla_azar1
   )
