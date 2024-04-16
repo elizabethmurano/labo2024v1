@@ -51,17 +51,12 @@ PARAM$hyperparametertuning$NEG_ganancia <- -3000
 
 # Aqui se cargan los bordes de los hiperparametros
 hs <- makeParamSet(
-  makeNumericParam("learning_rate", lower = 0.01, upper = 0.3),
-  makeNumericParam("feature_fraction", lower = 0.2, upper = 1.0),
-  makeIntegerParam("min_data_in_leaf", lower = 1L, upper = 8000L),
+  makeNumericParam("learning_rate", lower = 0.01, upper = 0.05),
+  makeNumericParam("feature_fraction", lower = 0.2, upper = 0.8),
+  makeIntegerParam("min_data_in_leaf", lower = 1L, upper = 2000L),
   makeIntegerParam("num_leaves", lower = 16L, upper = 1024L),
-  makeIntegerParam("envios", lower = 5000L, upper = 12000L),
-  makeIntegerParam("max_depth", lower = 3L, upper = 30L),
-  #makeIntegerParam("min_gain_to_split", lower = 0L, upper = 80000L),
-  makeDiscreteParam("lambda_l1", values = c(0.01, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0)),
-  makeDiscreteParam("lambda_l2", values = c(0.01, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0)),
-  makeIntegerParam("max_bin", lower = 3L, upper = 30L),
-  makeIntegerParam("num_iterations", lower = 30L, upper = 9000L)
+  makeIntegerParam("envios", lower = 9000L, upper = 12000L),
+  makeIntegerParam("max_depth", lower = 6L, upper = 14L)
  )
 
 #------------------------------------------------------------------------------
@@ -146,10 +141,10 @@ EstimarGanancia_lightgbm <- function(x) {
     verbosity = -100,
     #max_depth = -1, # -1 significa no limitar,  por ahora lo dejo fijo
     min_gain_to_split = 0.0, # por ahora, lo dejo fijo
-    #lambda_l1 = 0.0, # por ahora, lo dejo fijo
-    #lambda_l2 = 0.0, # por ahora, lo dejo fijo
-    #max_bin = 31, # por ahora, lo dejo fijo
-    #num_iterations = 9999, # valor grande, lo limita early_stopping_rounds
+    lambda_l1 = 0.0, # por ahora, lo dejo fijo
+    lambda_l2 = 0.0, # por ahora, lo dejo fijo
+    max_bin = 31, # por ahora, lo dejo fijo
+    num_iterations = 9999, # valor grande, lo limita early_stopping_rounds
     force_row_wise = TRUE, # para evitar warning
     seed = ksemilla_azar1
   )
