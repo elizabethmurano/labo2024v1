@@ -435,7 +435,7 @@ BorutaFilter <- function( boruta_semilla ) {
   )
   
   # Armo una lista auxiliar para el under sampling clase00
-  set.seed(PARAM$semilla, kind = "L'Ecuyer-CMRG")
+  set.seed(boruta_semilla, kind = "L'Ecuyer-CMRG")
   azar <- runif(nrow(dataset))
   
   # Agrego una columna para indicar cuales quiero usar del dataset

@@ -168,10 +168,10 @@ FE_historia_boruta <- function( pmyexp, pinputexps, pserver="local")
   param_local$CanaritosAsesinos$desvios <- 4.0
   
   #Boruta
-  PARAM$Boruta$enabled <- TRUE
-  PARAM$Boruta$train_from <- 202101
-  PARAM$Boruta$train_to <- 202101
-  PARAM$Boruta$max_runs <- 100
+  param_local$Boruta$enabled <- TRUE
+  param_local$Boruta$train_from <- 202101
+  param_local$Boruta$train_to <- 202101
+  param_local$Boruta$max_runs <- 100
 
   return( exp_correr_script( param_local ) ) # linea fija
 }
