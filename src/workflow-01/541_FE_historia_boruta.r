@@ -431,7 +431,7 @@ BorutaFilter <- function( boruta_semilla ) {
   
    campos_buenos <- setdiff(
     colnames(dataset),
-    c(campitos,"clase01")
+    campitos
   )
   
   # Armo una lista auxiliar para el under sampling clase00
@@ -463,7 +463,7 @@ BorutaFilter <- function( boruta_semilla ) {
   
   col_utiles <- unique(c(
     getSelectedAttributes(boruta_out),
-    c(campitos,"mes")
+    campitos
   ))
   
   col_inutiles <- setdiff(colnames(dataset), col_utiles)
