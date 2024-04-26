@@ -324,7 +324,7 @@ CanaritosAsesinos <- function(
 
   campos_buenos <- setdiff(
     colnames(dataset),
-    campitos
+    c(campitos,"clase01")
   )
 
   set.seed(canaritos_semilla, kind = "L'Ecuyer-CMRG")
@@ -431,7 +431,7 @@ BorutaFilter <- function( boruta_semilla ) {
   
    campos_buenos <- setdiff(
     colnames(dataset),
-    campitos
+    c(campitos,"clase01")
   )
   
   # Armo una lista auxiliar para el under sampling clase00
@@ -463,7 +463,7 @@ BorutaFilter <- function( boruta_semilla ) {
   
   col_utiles <- unique(c(
     getSelectedAttributes(boruta_out),
-    campitos
+    c(campitos,"mes")
   ))
   
   col_inutiles <- setdiff(colnames(dataset), col_utiles)
