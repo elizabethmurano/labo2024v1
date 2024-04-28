@@ -328,7 +328,7 @@ corrida_guantesblancos_202109 <- function( pnombrewf, pvirgen=FALSE )
   CA_catastrophe_default( "CA0015", "DT0015" )
 
   DR_drifting_guantesblancos( "DR0015", "CA0015" )
-  FE_historia_guantesblancos( "FE0015", "DR0015" )
+  FE_historia_boruta_v1( "FE0015", "DR0015" )
 
   TS_strategy_guantesblancos_202109( "TS0015", "FE0015" )
 
