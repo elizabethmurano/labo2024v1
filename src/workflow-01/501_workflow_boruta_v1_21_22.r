@@ -7,7 +7,7 @@ gc(full = TRUE) # garbage collection
 
 
 ## Instalamos los paquetes dinámicamente en el ambiente
-packages = c("rlang", "yaml", "data.table", "ParamHelpers",Boruta)
+packages = c("rlang", "yaml", "data.table", "ParamHelpers","Boruta")
 
 ## Now load or install&load all
 package.check <- lapply(
