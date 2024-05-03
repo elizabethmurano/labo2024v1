@@ -218,7 +218,7 @@ AgregaVarRandomForest <- function(
   azar <- runif(nrow(dataset_rf))
   
   dataset_rf[, entrenamiento :=
-               as.integer(foto_mes >= 202001 & foto_mes <= 202103 &
+               as.integer(foto_mes >= 202101 & foto_mes <= 202103 &
                             (clase01 == 1 | azar < 0.10))]
   
   # imputo los nulos, ya que ranger no acepta nulos
@@ -440,7 +440,7 @@ BorutaFilter <- function( boruta_semilla, boruta_max_run ) {
   
   # Agrego una columna para indicar cuales quiero usar del dataset
   dataset_boruta[, entrenamiento :=
-                   as.integer(foto_mes >= 202001 & foto_mes <= 202103 &
+                   as.integer(foto_mes >= 202101 & foto_mes <= 202103 &
                                 (clase01 == 1 | azar < 0.10))]
   
   # Imputo los nulos
