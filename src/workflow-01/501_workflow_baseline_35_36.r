@@ -329,15 +329,15 @@ ZZ_final_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
 # Que predice 202109
 # y ya genera archivos para Kaggle
 
-#corrida_guantesblancos_202109 <- function( pnombrewf, pvirgen=FALSE )
-#{
- # if( -1 == exp_wf_init( pnombrewf, pvirgen) ) return(0) # linea fija
+corrida_guantesblancos_202109 <- function( pnombrewf, pvirgen=FALSE )
+{
+  if( -1 == exp_wf_init( pnombrewf, pvirgen) ) return(0) # linea fija
   
-  #DT_incorporar_dataset_default( "DT0035", "competencia_2024.csv.gz")
-  #CA_catastrophe_default( "CA0035", "DT0035" )
+  DT_incorporar_dataset_default( "DT0035", "competencia_2024.csv.gz")
+  CA_catastrophe_default( "CA0035", "DT0035" )
   
-  #DR_drifting_guantesblancos( "DR0035", "CA0035" )
-  #FE_historia_guantesblancos( "FE0035", "DR0035" )
+  DR_drifting_guantesblancos( "DR0035", "CA0035" )
+  FE_historia_guantesblancos( "FE0035", "DR0035" )
   
   #TS_strategy_guantesblancos_202109( "TS0035", "FE0035" )
   
@@ -347,8 +347,8 @@ ZZ_final_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
   #ZZ_final_guantesblancos( "ZZ0035", c("HT0035","TS0035") )
   
   
-  #exp_wf_end( pnombrewf, pvirgen ) # linea fija
-#}
+  exp_wf_end( pnombrewf, pvirgen ) # linea fija
+}
 #------------------------------------------------------------------------------
 # Este es el  Workflow de Guantes Blancos
 # Que predice 202107
