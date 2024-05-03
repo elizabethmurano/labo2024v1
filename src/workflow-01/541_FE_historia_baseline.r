@@ -335,7 +335,7 @@ CanaritosAsesinos <- function(
   azar <- runif(nrow(dataset))
   
   dataset[, entrenamiento :=
-            foto_mes >= 202001 & foto_mes <= 202103 & (clase01 == 1 | azar < 0.10)]
+            foto_mes >= 202101 & foto_mes <= 202103 & (clase01 == 1 | azar < 0.10)]
   
   dtrain <- lgb.Dataset(
     data = data.matrix(dataset[entrenamiento == TRUE, campos_buenos, with = FALSE]),
