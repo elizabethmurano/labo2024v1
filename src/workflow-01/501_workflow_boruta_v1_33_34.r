@@ -66,7 +66,7 @@ source( exp_lib )
 
 #------------------------------------------------------------------------------
 
-# pmyexp <- "DT0032"
+# pmyexp <- "DT0034"
 # parch <- "competencia_2024.csv.gz"
 # pserver <- "local"
 
@@ -86,8 +86,8 @@ DT_incorporar_dataset_default <- function( pmyexp, parch, pserver="local")
 }
 #------------------------------------------------------------------------------
 
-# pmyexp <- "CA0031"
-# pinputexps <- "DT0032"
+# pmyexp <- "CA0033"
+# pinputexps <- "DT0034"
 # pserver <- "local"
 
 CA_catastrophe_default <- function( pmyexp, pinputexps, pserver="local")
@@ -106,8 +106,8 @@ CA_catastrophe_default <- function( pmyexp, pinputexps, pserver="local")
 # Data Drifting de Guantes Blancos
 
 
-# pmyexp <- "DR0031"
-# pinputexps <- "CA0031"
+# pmyexp <- "DR0033"
+# pinputexps <- "CA0033"
 # pserver <- "local"
 
 DR_drifting_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
@@ -127,8 +127,8 @@ DR_drifting_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
 }
 #------------------------------------------------------------------------------
 
-# pmyexp <- "FE0031"
-# pinputexps <- "DR0031"
+# pmyexp <- "FE0033"
+# pinputexps <- "DR0033"
 # pserver <- "local"
 
 FE_historia_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
@@ -166,16 +166,16 @@ FE_historia_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
   # No me engraso las manos con las variables nuevas agregadas por un RF
   # esta parte demora mucho tiempo en correr, y estoy en modo manos_limpias
   param_local$RandomForest$run <- TRUE
-  param_local$RandomForest$num.trees <- 30
-  param_local$RandomForest$max.depth <- 6
+  param_local$RandomForest$num.trees <- 20
+  param_local$RandomForest$max.depth <- 4
   param_local$RandomForest$min.node.size <- 1000
   param_local$RandomForest$mtry <- 40
   
   # no me engraso las manos con los Canaritos Asesinos
   # varia de 0.0 a 2.0, si es 0.0 NO se activan
-  param_local$CanaritosAsesinos$ratio <- 2.0
+  param_local$CanaritosAsesinos$ratio <- 0.0
   # desvios estandar de la media, para el cutoff
-  param_local$CanaritosAsesinos$desvios <- 2.0
+  param_local$CanaritosAsesinos$desvios <- 4.0
   
   # no me engraso las manos con boruta
   param_local$Boruta$enabled <- FALSE # FALSE, no corre nada de lo que sigue
@@ -209,7 +209,7 @@ TS_strategy_guantesblancos_202109 <- function( pmyexp, pinputexps, pserver="loca
   
   # Atencion  0.1  de  undersampling de la clase mayoritaria,  los CONTINUA
   # 1.0 significa NO undersampling ,  0.1  es quedarse con el 10% de los CONTINUA
-  param_local$train$undersampling <- 0.2
+  param_local$train$undersampling <- 0.3
   
   return( exp_correr_script( param_local ) ) # linea fija
 }
@@ -239,7 +239,7 @@ TS_strategy_guantesblancos_202107 <- function( pmyexp, pinputexps, pserver="loca
   
   # Atencion  0.1  de  undersampling de la clase mayoritaria,  los CONTINUA
   # 1.0 significa NO undersampling ,  0.1  es quedarse con el 10% de los CONTINUA
-  param_local$train$undersampling <- 0.2
+  param_local$train$undersampling <- 0.3
   
   return( exp_correr_script( param_local ) ) # linea fija
 }
@@ -291,10 +291,10 @@ HT_tuning_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
     
     extra_trees = FALSE,
     # White Gloves Bayesian Optimization, with a happy narrow exploration
-    learning_rate = c( 0.02, 0.8 ),
-    feature_fraction = c( 0.5, 0.9 ),
-    num_leaves = c( 8L, 2024L,  "integer" ),
-    min_data_in_leaf = c( 10L, 10000L, "integer" )
+    learning_rate = c( 0.02, 0.1 ),
+    feature_fraction = c( 0.75, 0.9 ),
+    num_leaves = c( 800, 2024L,  "integer" ),
+    min_data_in_leaf = c( 10L, 4000L, "integer" )
   )
   
   
@@ -341,18 +341,18 @@ corrida_guantesblancos_202109 <- function( pnombrewf, pvirgen=FALSE )
 {
   if( -1 == exp_wf_init( pnombrewf, pvirgen) ) return(0) # linea fija
   
-  DT_incorporar_dataset_default( "DT0031", "competencia_2024.csv.gz")
-  CA_catastrophe_default( "CA0031", "DT0031" )
+  DT_incorporar_dataset_default( "DT0033", "competencia_2024.csv.gz")
+  CA_catastrophe_default( "CA0033", "DT0033" )
   
-  DR_drifting_guantesblancos( "DR0031", "CA0031" )
-  FE_historia_guantesblancos( "FE0031", "DR0031" )
+  DR_drifting_guantesblancos( "DR0033", "CA0033" )
+  FE_historia_guantesblancos( "FE0033", "DR0033" )
   
-  TS_strategy_guantesblancos_202109( "TS0031", "FE0031" )
+  TS_strategy_guantesblancos_202109( "TS0033", "FE0033" )
   
-  HT_tuning_guantesblancos( "HT0031", "TS0031" )
+  HT_tuning_guantesblancos( "HT0033", "TS0033" )
   
   # El ZZ depente de HT y TS
-  ZZ_final_guantesblancos( "ZZ0031", c("HT0031","TS0031") )
+  ZZ_final_guantesblancos( "ZZ0033", c("HT0033","TS0033") )
   
   
   exp_wf_end( pnombrewf, pvirgen ) # linea fija
@@ -362,19 +362,19 @@ corrida_guantesblancos_202109 <- function( pnombrewf, pvirgen=FALSE )
 # Que predice 202107
 # genera completas curvas de ganancia
 #   NO genera archivos para Kaggle
-# por favor notal como este script parte de FE0031
+# por favor notal como este script parte de FE0033
 
 corrida_guantesblancos_202107 <- function( pnombrewf, pvirgen=FALSE )
 {
   if( -1 == exp_wf_init( pnombrewf, pvirgen) ) return(0) # linea fija
   
-  # Ya tengo corrido FE0031 y parto de alli
-  TS_strategy_guantesblancos_202107( "TS0032", "FE0031" )
+  # Ya tengo corrido FE0033 y parto de alli
+  TS_strategy_guantesblancos_202107( "TS0034", "FE0033" )
   
-  HT_tuning_guantesblancos( "HT0032", "TS0032" )
+  HT_tuning_guantesblancos( "HT0034", "TS0034" )
   
   # El ZZ depente de HT y TS
-  ZZ_final_guantesblancos( "ZZ0032", c("HT0032", "TS0032") )
+  ZZ_final_guantesblancos( "ZZ0034", c("HT0034", "TS0034") )
   
   
   exp_wf_end( pnombrewf, pvirgen ) # linea fija
@@ -385,11 +385,11 @@ corrida_guantesblancos_202107 <- function( pnombrewf, pvirgen=FALSE )
 
 
 # Hago primero esta corrida que me genera los experimentos
-# DT0031, CA0031, DR0031, FE0031, TS0031, HT0031 y ZZ0031
-corrida_guantesblancos_202109( "gb31" )
+# DT0033, CA0033, DR0033, FE0033, TS0033, HT0033 y ZZ0033
+corrida_guantesblancos_202109( "gb33" )
 
 
-# Luego partiendo de  FE0031
-# genero TS0032, HT0032 y ZZ0032
+# Luego partiendo de  FE0033
+# genero TS0034, HT0034 y ZZ0034
 
-corrida_guantesblancos_202107( "gb32" )
+corrida_guantesblancos_202107( "gb34" )
