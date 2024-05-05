@@ -66,7 +66,7 @@ source( exp_lib )
 
 #------------------------------------------------------------------------------
 
-# pmyexp <- "DT0048"
+# pmyexp <- "DT0050"
 # parch <- "competencia_2024.csv.gz"
 # pserver <- "local"
 
@@ -86,8 +86,8 @@ DT_incorporar_dataset_default <- function( pmyexp, parch, pserver="local")
 }
 #------------------------------------------------------------------------------
 
-# pmyexp <- "CA0047"
-# pinputexps <- "DT0048"
+# pmyexp <- "CA0049"
+# pinputexps <- "DT0050"
 # pserver <- "local"
 
 CA_catastrophe_default <- function( pmyexp, pinputexps, pserver="local")
@@ -106,8 +106,8 @@ CA_catastrophe_default <- function( pmyexp, pinputexps, pserver="local")
 # Data Drifting de Guantes Blancos
 
 
-# pmyexp <- "DR0047"
-# pinputexps <- "CA0047"
+# pmyexp <- "DR0049"
+# pinputexps <- "CA0049"
 # pserver <- "local"
 
 DR_drifting_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
@@ -127,8 +127,8 @@ DR_drifting_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
 }
 #------------------------------------------------------------------------------
 
-# pmyexp <- "FE0047"
-# pinputexps <- "DR0047"
+# pmyexp <- "FE0049"
+# pinputexps <- "DR0049"
 # pserver <- "local"
 
 FE_historia_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
@@ -333,18 +333,18 @@ corrida_guantesblancos_202109 <- function( pnombrewf, pvirgen=FALSE )
 {
   if( -1 == exp_wf_init( pnombrewf, pvirgen) ) return(0) # linea fija
   
-  DT_incorporar_dataset_default( "DT0047", "competencia_2024.csv.gz")
-  CA_catastrophe_default( "CA0047", "DT0047" )
+  DT_incorporar_dataset_default( "DT0049", "competencia_2024.csv.gz")
+  CA_catastrophe_default( "CA0049", "DT0049" )
   
-  DR_drifting_guantesblancos( "DR0047", "CA0047" )
-  FE_historia_guantesblancos( "FE0047", "DR0047" )
+  DR_drifting_guantesblancos( "DR0049", "CA0049" )
+  FE_historia_guantesblancos( "FE0049", "DR0049" )
   
-  #TS_strategy_guantesblancos_202109( "TS0047", "FE0047" )
+  #TS_strategy_guantesblancos_202109( "TS0049", "FE0049" )
   
-  #HT_tuning_guantesblancos( "HT0047", "TS0047" )
+  #HT_tuning_guantesblancos( "HT0049", "TS0049" )
   
   # El ZZ depente de HT y TS
-  #ZZ_final_guantesblancos( "ZZ0047", c("HT0047","TS0047") )
+  #ZZ_final_guantesblancos( "ZZ0049", c("HT0049","TS0049") )
   
   
   exp_wf_end( pnombrewf, pvirgen ) # linea fija
@@ -354,19 +354,19 @@ corrida_guantesblancos_202109 <- function( pnombrewf, pvirgen=FALSE )
 # Que predice 202107
 # genera completas curvas de ganancia
 #   NO genera archivos para Kaggle
-# por favor notal como este script parte de FE0047
+# por favor notal como este script parte de FE0049
 
 corrida_guantesblancos_202107 <- function( pnombrewf, pvirgen=FALSE )
 {
   if( -1 == exp_wf_init( pnombrewf, pvirgen) ) return(0) # linea fija
   
-  # Ya tengo corrido FE0047 y parto de alli
-  TS_strategy_guantesblancos_202107( "TS0048", "FE0047" )
+  # Ya tengo corrido FE0049 y parto de alli
+  TS_strategy_guantesblancos_202107( "TS0050", "FE0049" )
   
-  HT_tuning_guantesblancos( "HT0048", "TS0048" )
+  HT_tuning_guantesblancos( "HT0050", "TS0050" )
   
   # El ZZ depente de HT y TS
-  ZZ_final_guantesblancos( "ZZ0048", c("HT0048", "TS0048") )
+  ZZ_final_guantesblancos( "ZZ0050", c("HT0050", "TS0050") )
   
   
   exp_wf_end( pnombrewf, pvirgen ) # linea fija
@@ -377,11 +377,11 @@ corrida_guantesblancos_202107 <- function( pnombrewf, pvirgen=FALSE )
 
 
 # Hago primero esta corrida que me genera los experimentos
-# DT0047, CA0047, DR0047, FE0047, TS0047, HT0047 y ZZ0047
-corrida_guantesblancos_202109( "gb47" )
+# DT0049, CA0049, DR0049, FE0049, TS0049, HT0049 y ZZ0049
+corrida_guantesblancos_202109( "gb49" )
 
 
-# Luego partiendo de  FE0047
-# genero TS0048, HT0048 y ZZ0048
+# Luego partiendo de  FE0049
+# genero TS0050, HT0050 y ZZ0050
 
-corrida_guantesblancos_202107( "gb48" )
+corrida_guantesblancos_202107( "gb50" )
