@@ -197,11 +197,13 @@ TS_strategy_guantesblancos_202109 <- function( pmyexp, pinputexps, pserver="loca
   
   param_local$future <- c(202109)
   param_local$final_train <- c(202107, 202106, 202105, 202104, 202103, 202102,
-                               202101, 202012, 202011)
+                               202101, 202012, 202011, 202010, 202009, 202008, 202002, 202001, 201912,
+                               201911, 201910, 201909)
   
   
   param_local$train$training <- c(202105, 202104, 202103, 202102, 202101,
-                                  202012, 202011, 202010, 202009)
+                                  202012, 202011, 202010, 202009, 202008, 202002, 202001, 201912, 201911,
+                                  201910, 201909, 201908, 201907)
   param_local$train$validation <- c(202106) # si pongo los mismos meses que training hace cross validation
   param_local$train$testing <- c(202107)
   
@@ -225,11 +227,13 @@ TS_strategy_guantesblancos_202107 <- function( pmyexp, pinputexps, pserver="loca
   
   param_local$future <- c(202107)
   param_local$final_train <- c(202105, 202104, 202103, 202102,
-                               202101, 202012, 202011, 202010, 202009)
+                               202101, 202012, 202011, 202010, 202009, 202008, 202002, 202001, 201912,
+                               201911, 201910, 201909, 201908, 201907)
   
   
   param_local$train$training <- c(202103, 202102, 202101,
-                                  202012, 202011, 202010, 202009, 202008, 202002)
+                                  202012, 202011, 202010, 202009, 202008, 202002, 202001, 201912, 201911,
+                                  201910, 201909, 201908, 201907, 201906, 201905)
   param_local$train$validation <- c(202104)
   param_local$train$testing <- c(202105)
   
