@@ -306,7 +306,7 @@ HT_tuning_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
 #------------------------------------------------------------------------------
 # proceso ZZ_final  de Guantes Blancos
 
-ZZ_final_guantesblancos <- function( pmyexp, pinputexps, pserver="local")
+ZZ_final_semillerio_baseline <- function( pmyexp, pinputexps, pserver="local")
 {
   if( -1 == (param_local <- exp_init( pmyexp, pinputexps, pserver ))$resultado ) return( 0 )# linea fija
   
