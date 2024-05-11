@@ -144,7 +144,7 @@ FE_historia_baseline <- function( pmyexp, pinputexps, pserver="local")
   param_local$RandomForest$mtry <- 40
 
   # varia de 0.0 a 2.0, si es 0.0 NO se activan
-  param_local$CanaritosAsesinos$ratio <- 0.0
+  param_local$CanaritosAsesinos$ratio <- 1.5
   # desvios estandar de la media, para el cutoff
   param_local$CanaritosAsesinos$desvios <- 1.5
 
@@ -161,14 +161,12 @@ TS_strategy_baseline_202109 <- function( pmyexp, pinputexps, pserver="local")
 
 
   param_local$future <- c(202109)
-  param_local$final_train <- c(202107, 202106, 202105, 202104, 202103, 202102,
-                               202101, 202012, 202011, 202010, 202009, 202008, 202002, 202001, 201912,
-                               201911, 201910, 201909)
+  param_local$final_train <- c(202107, 202106, 202105, 202104,202002, 202001, 201912,
+                               201911, 201910, 201909,201908,201907,201906,201905,201904,201903)
 
 
-  param_local$train$training <- c(202105, 202104, 202103, 202102, 202101,
-                                  202012, 202011, 202010, 202009, 202008, 202002, 202001, 201912, 201911,
-                                  201910, 201909, 201908, 201907)
+  param_local$train$training <- c(202105, 202104,202002, 202001, 201912,
+                                  201911, 201910, 201909,201908,201907,201906,201905,201904,201903,201902,201901)
   param_local$train$validation <- c(202106)
   param_local$train$testing <- c(202107)
 
@@ -327,18 +325,18 @@ corrida_baseline_semillerio_202109 <- function( pnombrewf, pvirgen=FALSE )
 {
   if( -1 == exp_wf_init( pnombrewf, pvirgen) ) return(0) # linea fija
 
-  DT_incorporar_dataset_baseline( "DT0001-semv3", "competencia_2024.csv.gz")
-  CA_catastrophe_baseline( "CA0001-semv3", "DT0001-semv3" )
+  DT_incorporar_dataset_baseline( "DT0001-semv4", "competencia_2024.csv.gz")
+  CA_catastrophe_baseline( "CA0001-semv4", "DT0001-semv4" )
 
-  DR_drifting_baseline( "DR0001-semv3", "CA0001-semv3" )
-  FE_historia_baseline( "FE0001-semv3", "DR0001-semv3" )
+  DR_drifting_baseline( "DR0001-semv4", "CA0001-semv4" )
+  FE_historia_baseline( "FE0001-semv4", "DR0001-semv4" )
 
-  TS_strategy_baseline_202109( "TS0001-semv3", "FE0001-semv3" )
+  TS_strategy_baseline_202109( "TS0001-semv4", "FE0001-semv4" )
 
-  HT_tuning_baseline( "HT0001-semv3", "TS0001-semv3" )
+  HT_tuning_baseline( "HT0001-semv4", "TS0001-semv4" )
 
   # El ZZ depente de HT y TS
-  ZZ_final_semillerio_baseline( "ZZ0001-semv3", c("HT0001-semv3","TS0001-semv3") )
+  ZZ_final_semillerio_baseline( "ZZ0001-semv4", c("HT0001-semv4","TS0001-semv4") )
 
 
   exp_wf_end( pnombrewf, pvirgen ) # linea fija
@@ -355,18 +353,18 @@ corrida_baseline_semillerio_202109 <- function( pnombrewf, pvirgen=FALSE )
 #{
 #  if( -1 == exp_wf_init( pnombrewf, pvirgen) ) return(0) # linea fija
 #
- # DT_incorporar_dataset_baseline( "DT0001-semv3", "competencia_2024.csv.gz")
-  #CA_catastrophe_baseline( "CA0001-semv3", "DT0001-semv3" )
+ # DT_incorporar_dataset_baseline( "DT0001-semv4", "competencia_2024.csv.gz")
+  #CA_catastrophe_baseline( "CA0001-semv4", "DT0001-semv4" )
 
-  #DR_drifting_baseline( "DR0001-semv3", "CA0001-semv3" )
-  #FE_historia_baseline( "FE0001-semv3", "DR0001-semv3" )
+  #DR_drifting_baseline( "DR0001-semv4", "CA0001-semv4" )
+  #FE_historia_baseline( "FE0001-semv4", "DR0001-semv4" )
 
-  #TS_strategy_baseline_202107( "TS0002-semv3", "FE0001-semv3" )
+  #TS_strategy_baseline_202107( "TS0002-semv4", "FE0001-semv4" )
 
-  #HT_tuning_baseline( "HT0002-semv3", "TS0002-semv3" )
+  #HT_tuning_baseline( "HT0002-semv4", "TS0002-semv4" )
 
   # El ZZ depente de HT y TS
-  #ZZ_final_semillerio_baseline( "ZZ0002-semv3", c("HT0002-semv3","TS0002-semv3") )
+  #ZZ_final_semillerio_baseline( "ZZ0002-semv4", c("HT0002-semv4","TS0002-semv4") )
 
 
   #exp_wf_end( pnombrewf, pvirgen ) # linea fija
@@ -377,7 +375,7 @@ corrida_baseline_semillerio_202109 <- function( pnombrewf, pvirgen=FALSE )
 #Aqui empieza el programa
 
 
-corrida_baseline_semillerio_202109( "boom02" )
+corrida_baseline_semillerio_202109( "boom04" )
 
 
 # Luego partiendo de  FE0001
