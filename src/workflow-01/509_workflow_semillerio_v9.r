@@ -252,7 +252,7 @@ HT_tuning_baseline <- function( pmyexp, pinputexps, pserver="local")
     learning_rate = c( 0.01, 0.07 ),
     feature_fraction = c( 0.3, 0.7 ),
     num_leaves = c( 10L, 500L,  "integer" ),
-    min_data_in_leaf = c( 200L, 5000L, "integer" )
+    min_data_in_leaf = c( 200L, 3000L, "integer" )
   )
 
 
